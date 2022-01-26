@@ -71,7 +71,7 @@ ${SEARCH_FIELD}   //input[contains(@class,'body2 pml-input__input')]
 
 *** Test Cases ***
 A customer is able to add and adjust the products any category and proceed to checkout
-    [Setup]   Run Keywords   Open Login Page   ${URL}
+    [Setup]   Open Login Page   ${URL}
     Add A Product With Any Category   Maxi Dresses   Floral Print Dress - Light Pink   L
     Navigate To Cart Page
     Verify A Product In Shopping Bag    Floral Print Dress - Light Pink     L    1
