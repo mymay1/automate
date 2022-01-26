@@ -43,4 +43,4 @@ jobs:
         pip list
     - name: Run Robot test
       run: |
-        robot --pythonpath . -x outputxunit.xml AutomateTest.robot
+        robot --pythonpath . -x outputxunit.xml test.robot
