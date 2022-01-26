@@ -2,12 +2,11 @@
 Documentation     A test suite for verifying Shopping bag page. A customer is able to add the product, adjust size and quantity and then proceed to checkout
 Library           RequestsLibrary
 Library           SeleniumLibrary
+Library           String
 
 *** Variables ***
 ${URL}    https://www.pomelofashion.com/th/en/ 
-${BROWSER}     Chrome
-
-
+${BROWSER}   Chrome
 
 
 #variables path
@@ -72,6 +71,7 @@ ${SEARCH_FIELD}   //input[contains(@class,'body2 pml-input__input')]
 *** Test Cases ***
 A customer is able to add and adjust the products any category and proceed to checkout
     [Setup]   Open Login Page   ${URL}
+    Register User Account With Email Address   automation@hotmail.com   Automatation   Testing   Aa24680!1
     Add A Product With Any Category   Maxi Dresses   Floral Print Dress - Light Pink   L
     Navigate To Cart Page
     Verify A Product In Shopping Bag    Floral Print Dress - Light Pink     L    1
@@ -86,9 +86,10 @@ A customer is able to add and adjust the products any category and proceed to ch
     Delete A Procuct In Shopping Bag    Wanderlust Olivia Frost Pointed Toe Flats - Navy
     Enter Promo Code And Click Apply   promoCode
     Proceed To Checkout
-    [Teardown]   Close Browser   
+    [Teardown]   Run Keywords   Logout Page   AND   Close Browser   
   
 *** Keywords ***
+
 
 Open Login Page
     [Documentation]   A customer is able to open a website
@@ -96,21 +97,21 @@ Open Login Page
     Open Browser   ${url}    ${BROWSER}    
     Maximize Browser Window
     Wait Until Element Is Visible   ${MENU_LOGIN}    20
-    Sleep   10
-
+    
 
 Register User Account With Email Address
     [Documentation]   A customer is able to register user account by using Email Address and then register success
-    [Arguments]    ${email}   ${firstname}     ${lastname}     ${password}
+    [Arguments]    ${email}   ${firstname}     ${lastname}     ${psw}
     Wait Until Element Is Visible   ${MENU_REGISTER}   20
     Click Element    ${MENU_REGISTER}
     Wait Until Element Is Visible   ${REGISTER_FORM}   20
     Wait Until Element Is Visible   ${REGISTER_EMAIL_FORM}   20    
     Click Element    ${REGISTER_EMAIL}
-    Input Text   ${REGISTER_EMAIL}   ${email}
+    ${result}=    Generate Random String
+    Input Text   ${REGISTER_EMAIL}   ${result}${email}
     Input Text   ${REGISTER_FIRSTNAME}   ${firstname}    
     Input Text   ${REGISTER_LASTNAME}   ${lastname}
-    Input Text   ${REGISTER_PASSWORD}   ${password}
+    Input Text   ${REGISTER_PASSWORD}   ${psw}
     Click Element   ${REGISTER_CREATE_ACCOUNT_BTN}
     Wait Until Element Is Not Visible   ${MENU_REGISTER}   20
     Wait Until Element Is Visible   ${WELCOME_DLG}    20
