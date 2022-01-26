@@ -70,7 +70,7 @@ ${SEARCH_FIELD}   //input[contains(@class,'body2 pml-input__input')]
 *** Test Cases ***
 A customer is able to add and adjust the products any category and proceed to checkout
     [Setup]   Run Keywords   Open Login Page   ${URL}
-    ...   AND  Register User Account With Email Address   automation11@hotmail.com   Automatation   Testing   Aa24680!1
+    ...   AND  Register User Account With Email Address   automation12@hotmail.com   Automatation   Testing   Aa24680!1
     Add A Product With Any Category   Maxi Dresses   Floral Print Dress - Light Pink   L
     Navigate To Cart Page
     Verify A Product In Shopping Bag    Floral Print Dress - Light Pink     L    1
